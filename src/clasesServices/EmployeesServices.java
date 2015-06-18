@@ -3,6 +3,7 @@ package clasesServices;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -26,6 +27,7 @@ import dataBaseHR.Employees;
 public class EmployeesServices {
 	
 	private static EmployeesDAO empDAO;
+	private final static Logger log = Logger.getLogger("mylog");
 	
 	public EmployeesServices() {
 		empDAO = new EmployeesDAO();
@@ -39,6 +41,8 @@ public class EmployeesServices {
 		 * resultado en una lista de empleados y actualiza el salario de los empleados llamando el 
 		 * metodo actualizarSalario() de la propia clase.
 		 */
+		
+		log.info("Ejecución del método 'incrementarSalario'");
 		boolean ok = false;
 		Session session = null;
 		Transaction trans = null;
@@ -55,6 +59,7 @@ public class EmployeesServices {
 			ok = true;
 		}
 		catch(Exception e) {
+			log.error("Hay un error en la ejecución del método");
 			e.printStackTrace();
 			trans.rollback();
 		}
@@ -71,6 +76,7 @@ public class EmployeesServices {
 		 * empleadosMejorPagados() del objeto empDAO. El resultado será la lista de los empleados
 		 * mejor pagados por cada departamento.
 		 */
+		log.info("Ejecución del método 'obtenerEmpMejorPagados'");
 		Session session = null;
 		Transaction trans = null;
 		List<Employees> listaEmp = null;
@@ -82,6 +88,7 @@ public class EmployeesServices {
 			trans.commit();
 		}
 		catch(Exception e) {
+			log.error("Hay un error en la ejecución del método");
 			e.printStackTrace();
 			trans.rollback();
 		}
@@ -99,6 +106,7 @@ public class EmployeesServices {
 		 * que pertenecen a un dado departamento. El "id" del departamento será el parametro que
 		 * pasaremos al método empleadosPorDept.
 		 */
+		log.info("Ejecución del método 'obtenerEmplPorDept'");
 		Session session = null;
 		Transaction trans = null;
 		List<Employees> listaEmp = null;
@@ -110,6 +118,7 @@ public class EmployeesServices {
 			trans.commit();
 		}
 		catch(Exception e) {
+			log.error("Hay un error en la ejecución del método");
 			e.printStackTrace();
 			trans.rollback();
 		}
@@ -127,6 +136,7 @@ public class EmployeesServices {
 		 * mas preciso, se convierte en un int y se actualiza. Después de convertirlo otra vez en un
 		 * BigDecimal, se actualiza el valor de cada objeto de la lista.
 		 */
+		log.info("Ejecución del método 'actualizarSalario'");
 		for(Employees emp : listaEmpleados) {
 			int salarioAct = emp.getSalary().multiply(new BigDecimal(1.2)).intValue();
 			BigDecimal salarioBig = new BigDecimal(salarioAct);
@@ -140,6 +150,7 @@ public class EmployeesServices {
 		/*
 		 * Este método recorre una lista y imprime el valor de los objetos almacenados en la lista.
 		 */
+		log.info("Ejecución del método 'mostrarEmpleados'");
 		for(Employees emp : listaEmpleados) {
 			System.out.println(emp.toString());
 		}

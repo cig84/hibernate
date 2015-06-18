@@ -16,7 +16,7 @@ import dataBaseHR.Employees;
 /**
  * 
  * @author Francesco
- * Esta clase es un Test del método incrementarSalario() de la clase EmployeesServices.
+ * Esta clase es un Test de la clase MainIncrementarSalarioTodos.
  * Se ejecutan 3 operaciones con la base de datos:
  * 1) recoger el empleado con "id" 150;
  * 2) incrementar el salario de todos los empleados;
@@ -31,7 +31,7 @@ import dataBaseHR.Employees;
 public class TestMainIncrementarSalarioTodos {
 
 	@Test
-	public void testMain() {
+	public void testMainIncrementarSalarioTodos() {
 		
 		Session session = null;
 		Session session2 = null;

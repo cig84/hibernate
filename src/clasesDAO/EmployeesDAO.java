@@ -2,6 +2,8 @@ package clasesDAO;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import dataBaseHR.Employees;
 
 /**
@@ -14,8 +16,11 @@ import dataBaseHR.Employees;
 
 public class EmployeesDAO extends SuperClaseDAO implements InterfazEmployeeDAO {
 	
+	private final static Logger log = Logger.getLogger("mylog");
+	
 	public List<Employees> obtenerEmpleados() {
 		
+		log.info("Ejecución de la consulta 'obtener empleados'");
 		@SuppressWarnings("unchecked")
 		List<Employees> list = getSession().createSQLQuery(Query.obtenerEmpleados).addEntity(Employees.class).list();
 		return list;
@@ -23,6 +28,7 @@ public class EmployeesDAO extends SuperClaseDAO implements InterfazEmployeeDAO {
 	
 	public List<Employees> empleadosMejorPagados() {
 		
+		log.info("Ejecución de la consulta 'empleadosMejorPagados'");
 		@SuppressWarnings("unchecked")
 		List<Employees> list = getSession().createSQLQuery(Query.empleadosMejorPagados).addEntity(Employees.class).list();
 		return list;
@@ -30,6 +36,7 @@ public class EmployeesDAO extends SuperClaseDAO implements InterfazEmployeeDAO {
 	
 	public List<Employees> empleadosPorDept(int id) {
 		
+		log.info("Ejecución de la consulta 'empleadosPorDept'");
 		@SuppressWarnings("unchecked")
 		List<Employees> list = getSession().createSQLQuery(Query.empleadosPorDept + id).addEntity(Employees.class).list();
 		return list;

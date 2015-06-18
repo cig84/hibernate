@@ -1,5 +1,6 @@
 package clasesDAO;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -17,6 +18,8 @@ import org.hibernate.cfg.Configuration;
  */
 public class SessionManager {
 	
+	private final static Logger log = Logger.getLogger("mylog");
+	
 	static {
 		try {
 		Configuration configuration = new Configuration().configure();
@@ -24,6 +27,7 @@ public class SessionManager {
 		factory = configuration.buildSessionFactory(builder.build());
 		}
 		catch(Exception e){
+			log.error("Error al instanciar la SessionFactory");
 			e.printStackTrace();
 		}
 	}
@@ -35,14 +39,17 @@ public class SessionManager {
 	}
 	
 	public static SessionFactory getSessionFactory() {
+		log.info("Instancia de una SessionFactory");
 		return factory;
 	}
 	
 	public static Session obtenerSession() {
+		log.info("Instancia de una sessión");
 		return factory.openSession();
 	}
 	
 	public static void cerrar(Session session) {
+		log.info("Cierre de la sessión");
 		session.close();
 	}
 
