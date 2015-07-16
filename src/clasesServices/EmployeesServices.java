@@ -33,6 +33,34 @@ public class EmployeesServices {
 		empDAO = new EmployeesDAO();
 	}
 	
+	public Employees obtenerEmpleadoPorId(int id) {
+		/*
+		 * Este método devuelve unobjeto Employees que almacena lo que devuelve el método
+		 * obtenerEmpleadoPorId() llamado por el objeto emp.DAO. El resultado será el empleado
+		 * con el determinado id. El "id" del empleado será el parametro que pasaremos al método empleadosPorDept.
+		 */
+		Session session = null;
+		Transaction trans = null;
+		Employees emp = null;
+		EmployeesDAO empDAO = new EmployeesDAO();
+		try {
+			session = SessionManager.obtenerSession();
+			trans = session.beginTransaction();
+			empDAO.setSession(session);
+			emp = empDAO.obtenerEmpleadoPorId(id);
+			trans.commit();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			trans.rollback();
+		}
+		finally {
+			SessionManager.cerrar(session);
+
+		}
+		return emp;
+	}
+
 	public boolean incrementarSalario(){
 		/*
 		 * Este método incrementa el salario de todos los dependientes en la tabla Employees
@@ -73,8 +101,8 @@ public class EmployeesServices {
 	public List<Employees> obtenerEmpMejorPagados(){
 		/*
 		 * Este metodo devuelve una lista de empleados que almacena lo que devuelve el método 
-		 * empleadosMejorPagados() del objeto empDAO. El resultado será la lista de los empleados
-		 * mejor pagados por cada departamento.
+		 * empleadosMejorPagados() llamado por el objeto empDAO. El resultado será la lista 
+		 * de los empleados mejor pagados de cada departamento.
 		 */
 		log.info("Ejecución del método 'obtenerEmpMejorPagados'");
 		Session session = null;
@@ -102,9 +130,9 @@ public class EmployeesServices {
 	public List<Employees> obtenerEmplPorDept(int id) {
 		/*
 		 * Este método devuelve una lista de empleados que almacena lo que devuelve el método
-		 * empleadosPorDept() del objeto emp.DAO. El resultado será la lista de los empleados
-		 * que pertenecen a un dado departamento. El "id" del departamento será el parametro que
-		 * pasaremos al método empleadosPorDept.
+		 * empleadosPorDept() llamado por el objeto emp.DAO. El resultado será la lista de los 
+		 * empleados que pertenecen a un determinado departamento. El "id" del departamento será
+		 * el parametro que pasaremos al método empleadosPorDept.
 		 */
 		log.info("Ejecución del método 'obtenerEmplPorDept'");
 		Session session = null;
@@ -154,6 +182,12 @@ public class EmployeesServices {
 		for(Employees emp : listaEmpleados) {
 			System.out.println(emp.toString());
 		}
+	}
+	
+	public void mostrarEmpleado(Employees empleado) {
+		
+		log.info("Ejecución del método 'mostrarEmpleados'");
+		System.out.println(empleado.toString());
 	}
 
 }

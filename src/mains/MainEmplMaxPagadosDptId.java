@@ -2,11 +2,15 @@ package mains;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import clasesDAO.SessionManager;
 import clasesServices.EmployeesServices;
 import dataBaseHR.Employees;
 
 public class MainEmplMaxPagadosDptId {
+	
+	private final static Logger log = Logger.getLogger("mylog");
 
 	/**
 	 * @param args
@@ -15,6 +19,8 @@ public class MainEmplMaxPagadosDptId {
 	 * a la base de datos.
 	 */
 	public static void main(String[] args) {
+		
+		log.info("Ejecución del programa");
 		
 		EmployeesServices empServ = new EmployeesServices();
 		List<Employees> lista = empServ.obtenerEmpMejorPagados();

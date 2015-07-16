@@ -1,9 +1,13 @@
 package mains;
 
+import org.apache.log4j.Logger;
+
 import clasesDAO.SessionManager;
 import clasesServices.EmployeesServices;
 
 public class MainIncrementarSalarioTodos {
+	
+	private final static Logger log = Logger.getLogger("mylog");
 
 	/**
 	 * @param args
@@ -12,6 +16,8 @@ public class MainIncrementarSalarioTodos {
 	 * a la base de datos.
 	 */
 	public static void main(String[] args) {
+		
+		log.info("Ejecución del programa");
 		
 		EmployeesServices empServ = new EmployeesServices();
 		empServ.incrementarSalario();

@@ -8,9 +8,10 @@ package clasesDAO;
  */
 public class Query {
 	
-	static String obtenerEmpleados = new String ("SELECT * FROM EMPLOYEES");
-	static String empleadosMejorPagados = new String ("select * from EMPLOYEES where(DEPARTMENT_ID, SALARY) in (select department_id, MAX(salary) from EMPLOYEES group by DEPARTMENT_ID)");
-	static String empleadosPorDept = new String ("SELECT * FROM EMPLOYEES where department_id = ");
+	static String obtenerEmpleados = new String ("SELECT * FROM HR.EMPLOYEES");
+	static String obtenerEmpleadoPorId = new String ("SELECT * from EMPLOYEES where EMPLOYEE_ID = ");
+	static String empleadosMejorPagados = new String ("select * from HR.EMPLOYEES where(DEPARTMENT_ID, SALARY) in (select department_id, MAX(salary) from HR.EMPLOYEES group by DEPARTMENT_ID)");
+	static String empleadosPorDept = new String ("SELECT * FROM HR.EMPLOYEES where department_id = ");
 	
 
 }

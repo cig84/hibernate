@@ -3,7 +3,6 @@ package clasesDAO;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-
 import dataBaseHR.Employees;
 
 /**
@@ -18,9 +17,15 @@ public class EmployeesDAO extends SuperClaseDAO implements InterfazEmployeeDAO {
 	
 	private final static Logger log = Logger.getLogger("mylog");
 	
+	public Employees obtenerEmpleadoPorId(int id) {
+		
+		log.info("Ejecución de la consulta 'obtenerEmpleadoPorId'");
+		Employees emp = (Employees) getSession().createSQLQuery(Query.obtenerEmpleadoPorId + id).addEntity(Employees.class).uniqueResult();
+		return emp;
+	}
 	public List<Employees> obtenerEmpleados() {
 		
-		log.info("Ejecución de la consulta 'obtener empleados'");
+		log.info("Ejecución de la consulta 'obtenerEmpleados'");
 		@SuppressWarnings("unchecked")
 		List<Employees> list = getSession().createSQLQuery(Query.obtenerEmpleados).addEntity(Employees.class).list();
 		return list;
@@ -50,7 +55,7 @@ public class EmployeesDAO extends SuperClaseDAO implements InterfazEmployeeDAO {
 
 	@Override
 	public Employees read(int id) {
-		Employees emp = (Employees) getSession().createSQLQuery("SELECT * from EMPLOYEES where EMPLOYEE_ID = " + id).addEntity(Employees.class).uniqueResult();
+		Employees emp = (Employees) getSession().createSQLQuery("SELECT * from HR.EMPLOYEES where EMPLOYEE_ID = " + id).addEntity(Employees.class).uniqueResult();
 		return emp;
 		
 	}
